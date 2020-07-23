@@ -8,7 +8,7 @@ This is a quick and dirty module to interact with the Reftab API via PowerShell.
 ```powershell
 # One time setup
   # Download repository
-  # Wxtract the ReftabPS folder to a module path (e.g. $env:USERPROFILE\Documents\WindowsPowerShell\Modules\)
+  # Extract the ReftabPS folder to a module path (e.g. $env:USERPROFILE\Documents\WindowsPowerShell\Modules\)
 
 #Import the module
 Import-Module ReftabPS
