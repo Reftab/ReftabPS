@@ -1,20 +1,20 @@
 ReftabPS
 =============
 
-This is a quick and dirty module to interact with the Reftab API.
+This is a quick and dirty module to interact with the Reftab API via PowerShell.
 
 # Instructions
 
 ```powershell
 # One time setup
   # Download repository
-  #extract the ReftabPS folder to a module path (e.g. $env:USERPROFILE\Documents\WindowsPowerShell\Modules\)
+  # Wxtract the ReftabPS folder to a module path (e.g. $env:USERPROFILE\Documents\WindowsPowerShell\Modules\)
 
 #Import the module
-    Import-Module ReftabPS
+Import-Module ReftabPS
 
 # Get commands in the module
-  Get-Command -Module ReftabPS
+Get-Command -Module ReftabPS
 ```
 
 ### Prerequisites
@@ -29,8 +29,8 @@ This is a quick and dirty module to interact with the Reftab API.
 
 ```powershell
 #This example shows how to get an asset and update it
-#First enter your API key information
 
+#First enter your API key information
 Set-Keys -Secret <string> -Public <string>
 
 #Retrieve an asset

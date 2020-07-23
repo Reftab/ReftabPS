@@ -16,7 +16,7 @@
 
         [HashTable]$SearchParameters
     )
-    $uri = 'https://dev.reftab.com/api/' + $Endpoint
+    $uri = 'https://www.reftab.com/api/' + $Endpoint
     if ($SearchParameters) {
         $uri += '?'
         foreach($Param in $SearchParameters.keys) {
