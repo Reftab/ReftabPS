@@ -55,11 +55,9 @@
     try {
         Invoke-RestMethod -Uri $Uri -Method $Method -Body $Body -Headers $headers
     } catch {
-        Write-Host "StatusCode:" $_.Exception.Response.StatusCode.value__ 
-        Write-Host "StatusDescription:" $_.Exception.Response.StatusDescription
         $streamReader = [System.IO.StreamReader]::new($_.Exception.Response.GetResponseStream())
         $ErrResp = $streamReader.ReadToEnd() | ConvertFrom-Json
         $streamReader.Close()
-        Write-Host "ServerMessage:" $ErrResp.error
+        throw "$(@{StatusCode = $_.Exception.Response.StatusCode.value__; Description = $_.Exception.Response.StatusDescription; Message = $ErrResp.error} | ConvertTo-Json)"
     }
 }
