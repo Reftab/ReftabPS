@@ -13,6 +13,7 @@
         Secret = $secret
         Public = $public
         Endpoint = 'loanees'
+        SearchParameters = $SearchParameters
     }
     
     Invoke-Reftab @Parameters

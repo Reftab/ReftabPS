@@ -13,6 +13,7 @@
         Secret = $secret
         Public = $public
         Endpoint = 'subusers'
+        SearchParameters = $SearchParameters
     }
     
     Invoke-Reftab @Parameters

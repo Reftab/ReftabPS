@@ -19,17 +19,19 @@
     $uri = 'https://www.reftab.com/api/' + $Endpoint
     if ($SearchParameters) {
         $uri += '?'
+        $paramCollection = @()
         foreach($Param in $SearchParameters.keys) {
-            $uri += $Param + '=' + $SearchParameters[$Param] + '&'
+            $paramCollection += $Param + '=' + $SearchParameters[$Param]
         }
+        $uri += $paramCollection -join '&'
     }
     $md5 = ''
     $contentType = ''
     if ($Body) {
         $Body = $Body | ConvertTo-JSON
+        $Body = [System.Text.Encoding]::UTF8.GetBytes($Body)
         $md5Provider = New-Object -TypeName System.Security.Cryptography.MD5CryptoServiceProvider
-        $utf8 = New-Object -TypeName System.Text.UTF8Encoding
-        $md5 = [System.BitConverter]::ToString($md5Provider.ComputeHash($utf8.GetBytes($Body)))
+        $md5 = [System.BitConverter]::ToString($md5Provider.ComputeHash($Body))
         $md5 = $md5.ToLower() -replace '-', ''
         $contentType = 'application/json'
     }
