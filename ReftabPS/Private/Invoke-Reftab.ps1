@@ -57,9 +57,16 @@
     try {
         Invoke-RestMethod -Uri $Uri -Method $Method -Body $Body -Headers $headers
     } catch {
-        $streamReader = [System.IO.StreamReader]::new($_.Exception.Response.GetResponseStream())
-        $ErrResp = $streamReader.ReadToEnd() | ConvertFrom-Json
-        $streamReader.Close()
-        throw "$(@{StatusCode = $_.Exception.Response.StatusCode.value__; Description = $_.Exception.Response.StatusDescription; Message = $ErrResp.error} | ConvertTo-Json)"
+        $StatusCode = $_.Exception.Response.StatusCode.value__ 
+        if ($PSVersionTable.PSVersion.Major -lt 6) {
+          $streamReader = [System.IO.StreamReader]::new($_.Exception.Response.GetResponseStream())
+          $ErrResp = $streamReader.ReadToEnd() | ConvertFrom-Json
+          $streamReader.Close()
+          $Description = $_.Exception.Response.StatusDescription
+        } else {
+          $ErrResp = $_.ErrorDetails.Message | ConvertFrom-Json
+          $Description = $_.Exception.Response.ReasonPhrase
+        }
+        throw "$(@{StatusCode = $StatusCode; Description = $Description; Message = $ErrResp.error} | ConvertTo-Json)"
     }
 }
