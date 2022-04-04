@@ -35,7 +35,7 @@
         $md5 = $md5.ToLower() -replace '-', ''
         $contentType = 'application/json'
     }
-    $now = Get-Date -Format 'o'
+    $now = Get-Date (Get-Date).ToUniversalTime() -UFormat '+%Y-%m-%dT%H:%M:%S.000Z'
     $signatureToSign = $Method + "`n" +
         $md5 + "`n" +
         $contentType + "`n" +
