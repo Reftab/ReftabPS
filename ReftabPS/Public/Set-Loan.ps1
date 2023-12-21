@@ -1,4 +1,4 @@
-﻿function Set-Loanee() {
+﻿function Set-Loan() {
     Param(
         [parameter(mandatory = $true)]
         [string]$LoanId,
